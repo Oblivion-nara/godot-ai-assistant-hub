@@ -225,7 +225,7 @@ placeholder_text = "e.g. http://127.0.0.1:11434"
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-tooltip_text = "API key obtained from https://openrouter.ai/keys"
+tooltip_text = "The API key is a password some LLM providers require."
 placeholder_text = "API key"
 secret = true
 
@@ -255,7 +255,7 @@ theme_override_constants/separation = -8
 [node name="VersionLabel" type="Label" parent="VBoxContainer/TabContainer/AI Hub/VBoxContainer/GridContainer/AdvancedSettings/HBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "v1.7.2"
+text = "v1.7.3"
 horizontal_alignment = 2
 
 [node name="UpgradeBtn" type="Button" parent="VBoxContainer/TabContainer/AI Hub/VBoxContainer/GridContainer/AdvancedSettings/HBoxContainer/HBoxContainer"]

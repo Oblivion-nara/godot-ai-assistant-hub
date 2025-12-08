@@ -7,9 +7,14 @@ var _headers: PackedStringArray # set in initialize function
 const DEPRECATED_API_KEY_SETTING := "plugins/ai_assistant_hub/openwebui_api_key"
 
 
-func _initialize() -> void:
+func _rebuild_headers() -> void:
 	_headers = ["Content-Type: application/json", 
 				"Authorization: Bearer %s" % _api_key ]
+
+
+func _initialize() -> void:
+	_rebuild_headers()
+	llm_config_changed.connect(_rebuild_headers)
 
 
 func send_get_models_request(http_request:HTTPRequest) -> bool:

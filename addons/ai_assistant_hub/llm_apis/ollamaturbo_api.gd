@@ -5,10 +5,16 @@ extends LLMInterface
 var _headers: PackedStringArray # set in initialize function
 
 
-func _initialize() -> void:
+func _rebuild_headers() -> void:
 	_headers = ["Content-Type: application/json",
 				"Authorization: Bearer %s" % _api_key,  # Include the key in the headers
 	]
+
+
+func _initialize() -> void:
+	_rebuild_headers()
+	llm_config_changed.connect(_rebuild_headers)
+
 
 func send_get_models_request(http_request:HTTPRequest) -> bool:
 	var error = http_request.request(_models_url, _headers, HTTPClient.METHOD_GET)

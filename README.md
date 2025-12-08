@@ -122,15 +122,19 @@ If you have a powerful PC, just keep increasing the level of the model. You will
 
 **What's new in the latest version**
 -----------------------
-**1.7.0**
-* Ollama Turbo support
-
-**1.7.1**
-* The plugin checks for the latest version and shows a upgrade button if there is a newer version.
+**1.7.3**
+* Bug fix in Jan API, now it displays the field to input the API key.
+* Bug fix in OllamaTurbo, OpenRouter, and OpenWebUI, now the headers get refreshed when the API key changes.
 
 **1.7.2**
 * Bug fix in Jan API.
 * Allow to rearrange chat tabs.
+
+**1.7.1**
+* The plugin checks for the latest version and shows a upgrade button if there is a newer version.
+
+**1.7.0**
+* Ollama Turbo support
 
 [Full version history](versions.md)
 

@@ -2,11 +2,28 @@
 class_name JanAPI
 extends LLMInterface
 
-const HEADERS := ["Content-Type: application/json"]
+var _headers: PackedStringArray # set in _initialize function
+
+
+func _rebuild_headers() -> void:
+	_headers = ["Content-Type: application/json",
+				"Authorization: Bearer %s" % _api_key,  # Include the key in the headers
+	]
+
+
+func _initialize() -> void:
+	_rebuild_headers()
+	llm_config_changed.connect(_rebuild_headers)
 
 
 func send_get_models_request(http_request: HTTPRequest) -> bool:
-	var err := http_request.request(_models_url, HEADERS, HTTPClient.METHOD_GET)
+	if _api_key.is_empty():
+		push_error("JanAPI API key not set. Please configure the API key in the main tab.")
+		return false
+	
+	print(_headers)
+	
+	var err := http_request.request(_models_url, _headers, HTTPClient.METHOD_GET)
 	if err != OK:
 		push_error("JanAPI GET models failed: %s" % _models_url)
 		return false
@@ -17,7 +34,7 @@ func read_models_response(body: PackedByteArray) -> Array[String]:
 	var j := JSON.new()
 	j.parse(body.get_string_from_utf8())
 	var data := j.get_data()
-	if data.has("data") and data.data is Array:
+	if data != null and data.has("data") and data.data is Array:
 		var out: Array[String]= []
 		for m in data.data:
 			if m.has("id"):
@@ -28,9 +45,14 @@ func read_models_response(body: PackedByteArray) -> Array[String]:
 
 
 func send_chat_request(http_request: HTTPRequest, content: Array) -> bool:
-	if model.is_empty():
-		push_error("JanAPI: no model set!")
+	if _api_key.is_empty():
+		push_error("JanAPI API key not set. Please configure the API key in the main tab and spawn a new assistant.")
 		return false
+	
+	if model.is_empty():
+		push_error("ERROR: You need to set an AI model for this assistant type.")
+		return false
+	
 	var body := {
 		"model": model,
 		"messages": content
@@ -38,7 +60,7 @@ func send_chat_request(http_request: HTTPRequest, content: Array) -> bool:
 	if override_temperature:
 		body["temperature"] = temperature
 	var payload := JSON.new().stringify(body)
-	var err := http_request.request(_chat_url, HEADERS, HTTPClient.METHOD_POST, payload)
+	var err := http_request.request(_chat_url, _headers, HTTPClient.METHOD_POST, payload)
 	if err != OK:
 		push_error("JanAPI chat request failed: %s\n%s" % [_chat_url, payload])
 		return false
