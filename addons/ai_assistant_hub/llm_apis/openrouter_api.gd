@@ -8,11 +8,16 @@ const DEPRECATED_API_KEY_FILE := "res://addons/ai_assistant_hub/llm_apis/openrou
 var _headers: PackedStringArray # set in _initialize function
 
 
-func _initialize() -> void:
+func _rebuild_headers() -> void:
 	_headers = ["Content-Type: application/json",
 				"Authorization: Bearer %s" % _api_key,  # Include the key in the headers
 				"HTTP-Referer: godot://ai_assistant_hub", # OpenRouter requires source reference
 	]
+
+
+func _initialize() -> void:
+	_rebuild_headers()
+	llm_config_changed.connect(_rebuild_headers)
 
 
 # Get model list
