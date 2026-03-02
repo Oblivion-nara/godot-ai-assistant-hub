@@ -1,0 +1,31 @@
+[gd_scene load_steps=2 format=3 uid="uid://dn8d3sh7r7rq7"]
+
+[ext_resource type="Script" path="res://addons/ai_assistant_hub/documentation_fetcher/http_fetch.gd" id="1_1p446"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+use_threads = true
+script = ExtResource("1_1p446")
+
+[node name="FileDialog" type="FileDialog" parent="HTTPRequest"]
+mode = 2
+title = "Open a Directory"
+initial_position = 1
+size = Vector2i(720, 360)
+ok_button_text = "Select Current Folder"
+dialog_hide_on_ok = true
+file_mode = 2
+access = 2
+use_native_dialog = true
+
+[connection signal="canceled" from="HTTPRequest/FileDialog" to="HTTPRequest" method="_on_file_dialog_canceled"]
+[connection signal="confirmed" from="HTTPRequest/FileDialog" to="HTTPRequest" method="_on_file_dialog_confirmed"]
+[connection signal="custom_action" from="HTTPRequest/FileDialog" to="HTTPRequest" method="_on_file_dialog_custom_action"]
+[connection signal="dir_selected" from="HTTPRequest/FileDialog" to="HTTPRequest" method="_on_file_dialog_dir_selected"]

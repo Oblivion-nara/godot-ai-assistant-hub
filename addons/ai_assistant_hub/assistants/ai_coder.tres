@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="AIAssistantResource" load_steps=4 format=3 uid="uid://ck2pc6x54n4e8"]
+
+[ext_resource type="Resource" uid="uid://c0xq2vafep0gu" path="res://addons/ai_assistant_hub/llm_providers/ollama.tres" id="1_xggpi"]
+[ext_resource type="Script" path="res://addons/ai_assistant_hub/quick_prompts/ai_quick_prompt_resource.gd" id="2_sa02p"]
+[ext_resource type="Script" path="res://addons/ai_assistant_hub/assistants/ai_assistant_resource.gd" id="3_ssfbu"]
+
+[resource]
+script = ExtResource("3_ssfbu")
+type_name = "coder"
+ai_model = "glm-4.7-flash:q8_0"
+llm_provider = ExtResource("1_xggpi")
+ai_description = "You are a useful Godot AI assistant."
+use_custom_temperature = false
+custom_temperature = 0.5
+quick_prompts = Array[ExtResource("2_sa02p")]([])

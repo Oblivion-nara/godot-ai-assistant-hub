@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="AIAssistantResource" load_steps=4 format=3 uid="uid://ci2ts2bgcnwmv"]
+
+[ext_resource type="Resource" uid="uid://n83b6wcg7so" path="res://addons/ai_assistant_hub/llm_providers/xai.tres" id="1_4cc86"]
+[ext_resource type="Script" path="res://addons/ai_assistant_hub/quick_prompts/ai_quick_prompt_resource.gd" id="2_bpouf"]
+[ext_resource type="Script" path="res://addons/ai_assistant_hub/assistants/ai_assistant_resource.gd" id="3_at5oq"]
+
+[resource]
+script = ExtResource("3_at5oq")
+type_name = "coder think"
+ai_model = "grok-4-1-fast-reasoning"
+llm_provider = ExtResource("1_4cc86")
+ai_description = "You are a useful Godot AI assistant."
+use_custom_temperature = false
+custom_temperature = 0.5
+quick_prompts = Array[ExtResource("2_bpouf")]([])
