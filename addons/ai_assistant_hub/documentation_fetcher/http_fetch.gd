@@ -16,16 +16,24 @@ func _ready():
 func _http_request_completed(result, response_code, headers, body):
 	print("downloaded")
 	print(response_code)
-	var json = JSON.new()
-	json.parse(body.get_string_from_utf8())
-	var response = json.get_data()
+	#unpack zip
+	var zipreader = ZIPReader.new()
+	zipreader.open(download_file)
+	var files = zipreader.get_files()
+	for file in files:
+		print(file)
+	#format files into new folder
+	#var json = JSON.new()
+	#json.parse(body.get_string_from_utf8())
+	#var response = json.get_data()
 
 func _on_file_dialog_dir_selected(dir: String) -> void:
 	download_file = dir+"/download.zip"
 	print(download_file)
-	var error = request(url)
+	var error = OK#request(url)
 	if error != OK:
 		push_error("An error occurred in the HTTP request.")
+	self._http_request_completed("",200,"","")
 
 
 func _on_file_dialog_canceled() -> void:
