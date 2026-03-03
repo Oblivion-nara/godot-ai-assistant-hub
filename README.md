@@ -1,7 +1,7 @@
 **Godot AI Assistant Hub**
 <img src="https://github.com/FlamxGames/godot-ai-assistant-hub/blob/main/logo.png" width="50px">
 ==========================
-**Latest version: 1.7.3**
+**Latest version: 1.8.0**
 <sub>([What's new?](#whats-new-in-the-latest-version))</sub>
 <sub>([Upgrading to a newer version](#upgrading-to-a-newer-version))</sub>
 
@@ -10,18 +10,24 @@ A Flexible Godot Plugin for AI Assistants
 
 Embed AI assistants in Godot with the ability to read and write code in Godot's Code Editor.
 
-It leverages [Ollama](https://ollama.com/) as an LLM provider, an open-source tool to run models locally for free. If you're not familiar with Ollama, I found it to be extremely simple to use; you should give it a try!
+This plugin does not run LLM models directly, but acts as an interface between Godot and your local LLM. There are plenty of options to run LLMs locally. Thanks to the community this tool supports the following:
 
-If you use ChatGPT, Gemini, or similar tools with a REST API, you could easily extend this addon to work with them—it was designed to be API agnostic. See the videos for more information on this.
-
-[Click here to go to the tutorial playlist](https://www.youtube.com/playlist?list=PL2PLLTlAI2ogvgcY8mG-QsMI1dDUDPyF2)
-
-Thanks to contributors, additionally to **Ollama**, the following APIs are already supported:
+* [Ollama](https://ollama.com/)*
 * Google Gemini
+* Jan
 * Ollama Turbo
 * OpenRouter
-* Jan
 * OpenWebUI
+* xAI
+
+**Ollama** is officially supported, while the other LLM providers are maintained by community contributions. Regardless, the plugin delivers the same functionality for all of them.
+
+If you use other LLM tools not listed here, you could easily extend this plugin to work with them if they have a REST API. This plugin was designed to be API agnostic. See the videos for more information on this.
+
+Tutorial Playlist
+-----------------------------------------
+
+[Click here to go to the tutorial playlist](https://www.youtube.com/playlist?list=PL2PLLTlAI2ogvgcY8mG-QsMI1dDUDPyF2)
 
 First Video 👇
 
@@ -41,15 +47,13 @@ First Video 👇
 **System Requirements**
 -----------------------
 
-It depends on the models you use and the speed you expect. Of course, if you extend the plugin to run hosted models (ChatGPT, Gemini, etc.), then you don't need to worry about this (just about the bills).
+The system requirements to run local LLMs depend on the models you use and the speed you expect. Of course, if you use the plugin to run remote models (Gemini, xAI, etc.), then you don't need to worry about this (just about the bills).
 
 **Tested in versions**
 
-* Godot 4.4
-* Godot 4.3
+* Godot 4.3 to 4.6
 
-If you test it in other versions, let me know in the discussions section so I can add it here.
-
+Tested in stable versions only.
 
 **Getting Started**
 --------------------
@@ -80,14 +84,15 @@ The following keywords are used to allow the prompt to pull data from the Code E
 In general this is what you need to do:
 
 0. If running your LLMs locally, install Ollama or some other LLM supported and download at least one model.
-1. Download this addon from [here](https://github.com/FlamxGames/godot-ai-assistant-hub/archive/refs/heads/main.zip), unzip it, and copy the folder ai_assistant_hub into your addons folder (`res://addons/ai_assistant_hub/`).
-2. Enable the plugin in your project settings (**Project > Project Settings... > Plugins**), you should see a new tab `AI Hub` in the bottom panel.
-3. Select an LLM provider, by default Ollama is selected.
-4. You should see a list of models you have installed. Click one and use the "New assistant type" button.
-5. Fill up the data for your assistant.
-6. After saving, you should see a new button for your assistant type.
-7. Your assistant type will open in the Inspector panel, there you can optionally confirgure an icon and Quick Prompts for your assistant type, the later would allow it to interact with the code editor.
-8. Click the assistant type button to start a chat with a new assistant of this type.
+1. Download this addon from [here](https://github.com/FlamxGames/godot-ai-assistant-hub/archive/refs/heads/main.zip), unzip it, and copy the folder ai_assistant_hub into your addons folder `res://addons/ai_assistant_hub/`. (You may see errors, those should go away after next step.)
+2. Reload your project: **Project > Reload Current Project** (this will reload the whole project, so make sure to save before doing this).
+3. Enable the plugin in your project settings (**Project > Project Settings... > Plugins**), you should see a new tab `AI Hub` in the bottom panel.
+4. Select an LLM provider, by default Ollama is selected.
+5. You should see a list of models you have installed. Click one and use the "New assistant type" button.
+6. Fill up the data for your assistant.
+7. After saving, you should see a new button for your assistant type.
+8. Your assistant type will open in the Inspector panel, there you can optionally confirgure an icon and Quick Prompts for your assistant type, the later would allow it to interact with the code editor.
+9. Click the assistant type button to start a chat with a new assistant of this type.
 
 ### Configuring Quick Prompts and icon ###
 1. Right-click the button for your assistant type, there you can select Edit or Delete.
@@ -122,19 +127,8 @@ If you have a powerful PC, just keep increasing the level of the model. You will
 
 **What's new in the latest version**
 -----------------------
-**1.7.3**
-* Bug fix in Jan API, now it displays the field to input the API key.
-* Bug fix in OllamaTurbo, OpenRouter, and OpenWebUI, now the headers get refreshed when the API key changes.
-
-**1.7.2**
-* Bug fix in Jan API.
-* Allow to rearrange chat tabs.
-
-**1.7.1**
-* The plugin checks for the latest version and shows a upgrade button if there is a newer version.
-
-**1.7.0**
-* Ollama Turbo support
+**1.8.0**
+* xAI API support
 
 [Full version history](versions.md)
 
